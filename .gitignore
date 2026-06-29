@@ -1,0 +1,12 @@
+.remote
+node_modules
+.DS_Store
+
+# Log and source
+dev-log/
+dev-source/
+
+# Temp and backup files
+*~
+\#*#
+.agents/AGENTS.md~
