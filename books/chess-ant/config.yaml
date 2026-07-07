@@ -1,0 +1,7 @@
+title: "chess-ant 開発ノート：泥臭い手作業からAIとの協業へ、チェスエンジン開発5年の軌跡"
+summary: "DEAPのアリGPシミュレータを出発点に、MCTSと機械学習、独自GUI開発、そしてAIエージェントとの仕様駆動開発に至るまでの5年間の個人開発記録。"
+topics: ["python", "chess", "mcts", "generative-ai", "gui"]
+published: false
+price: 0
+chapters:
+  - 1_start_with_ant
