@@ -5,3 +5,11 @@ published: false
 price: 0
 chapters:
   - 1_start_with_ant
+  - 2_pasta_commit
+  - 3_ml_and_colab
+  - 4_mcts_solver_independent
+  - 5_first_ai_collaboration
+  - 6_py_chessboardjs_gui
+  - 7_ai_chat_debugging
+  - 8_engine_worker_concurrency
+  - 9_epilogue
