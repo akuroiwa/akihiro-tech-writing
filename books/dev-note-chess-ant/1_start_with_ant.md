@@ -61,13 +61,16 @@ GP は、数式やアルゴリズムの構造そのものを木構造として�
 
 GP によるミニマックス探索の実装に苦戦する中で、チェスAIの世界では別の潮流が起きていました。DeepMind が開発した AlphaZero (アルファゼロ) が、チェス・将棋・囲碁で人間を凌駕したのです。
 
-AlphaZero が **モンテカルロ木探索 (Monte Carlo Tree Search: MCTS)** を採用していることを知り、私は MCTS 自体を調べ始めました。
+DeepMind が **モンテカルロ木探索 (Monte Carlo Tree Search: MCTS)** を採用していることを知り、私は MCTS 自体を調べ始めました。
+
+ここで技術的な違いを整理しておくと、AlphaZero ではニューラルネットワークが指し手予測の事前確率 $P(s, a)$ (Policy) と勝敗評価 $v$ (Value) を同時に出力し、それらを用いた PUCT（Polynomial Upper Confidence Trees）アルゴリズムで探索を制御しています。
+一方、私の開発する `chess-ant` は事前確率（Policy）を使用しない、従来の UCT（Upper Confidence Bound applied to Trees）をベースとして設計しました。ニューラルネットワークは盤面評価値（Value）のみを推論し、UCTの探索定数 $C$ の制御（探索と活用のバランス調整）には GP を用いるという独自のアーキテクチャを採用したのです。
 
 MCTS を理解する上で大きな助けとなったのが、将棋AI開発者である山岡忠夫氏のブログ「TadaoYamaokaの開発日記」です。AlphaZero 関連の論文は難解で、そのまま読み解くのは困難でしたが、このブログを通じて MCTS の実装上の考え方や探索定数の調整を理解することができました。
 
 * [TadaoYamaokaの開発日記](https://tadaoyamaoka.hatenablog.com/entry/2018/12/08/191619)
 
-さらに、Google DeepMind のオープンソース強化学習フレームワーク **OpenSpiel** のソースコードを読んでいると、`mcts.py` の docstring に重要な論文がいくつか引用されていました。
+さらに、Google DeepMind のオープンソース強化学習フレームワーク **OpenSpiel**[^1] のソースコードを読んでいると、`mcts.py`[^2] の docstring に重要な論文がいくつか引用されていました。
 
 ```
 Some references:
@@ -81,7 +84,7 @@ Some references:
   https://dke.maastrichtuniversity.nl/m.winands/documents/uctloa.pdf
 ```
 
-この中に含まれていた **「Monte-Carlo Tree Search Solver」 (Winands et al., 2008)** の論文が、後の `mcts-solver` パッケージ（第4章で詳述）の根幹となる枝切りアルゴリズムの出典です。OpenSpiel のような著名なフレームワークに引用されていることで、この論文の重要性を改めて認識しました。
+この中に含まれていた **「Monte-Carlo Tree Search Solver」 (Winands et al., 2008)**[^3] の論文が、後の `mcts-solver` パッケージ（第4章で詳述）の根幹となる枝切りアルゴリズムの出典です。OpenSpiel のような著名なフレームワークに引用されていることで、この論文の重要性を改めて認識しました。
 
 こうして、GPによる探索定数 $C$ の動的選択という発想も徐々に形になっていきました。定数 $C$ を固定値とするのではなく、**GP を用いて盤面の状況に応じて最適な探索定数を動的に選択させる**という `chess-ant` 独自のアーキテクチャは、これらの学びを経て少しずつ洗練されていったのです。
 
@@ -104,7 +107,7 @@ a_t = arg_max(Q(s_t, a) + C_gp * math.sqrt(2 * math.log(N(s_t)) / N(s_t, a)))
 
 チェスの「駒の動きを選択して王手を目指す」プロセスは、化学における「原子や官能基を結合させて目的の性質を持つ分子を設計する」プロセスと、木探索という観点で共通しています。
 
-応用のために必要となった化学情報学 (Cheminformatics) ソフトウェアの使い方は、**「化学の新しいカタチ」**というサイトで学びました。有機合成化学者向けのケモインフォマティクス入門として、RDKit の実践的な使い方が丁寧に解説されており、大変助かりました。
+応用のために必要となった化学情報学 (Cheminformatics) ソフトウェアの使い方は、**「化学の新しいカタチ」**[^4]というサイトで学びました。有機合成化学者向けのケモインフォマティクス入門として、RDKit の実践的な使い方が丁寧に解説されており、大変助かりました。
 
 * [化学の新しいカタチ | 有機合成化学者のための計算化学・ケモインフォマティクス入門](https://future-chem.com/)
 
@@ -119,3 +122,9 @@ a_t = arg_max(Q(s_t, a) + C_gp * math.sqrt(2 * math.log(N(s_t)) / N(s_t, a)))
 * **GitHub Repository**: [akuroiwa/chess-ant](https://github.com/akuroiwa/chess-ant)
 * **Read the Docs マニュアル（日本語）**: [Chess-Ant ドキュメント](https://chess-ant.readthedocs.io/ja/latest/)
 * **Read the Docs マニュアル（英語）**: [Chess-Ant Documentation](https://chess-ant.readthedocs.io/en/latest/)
+
+[^1]: [google-deepmind/open_spiel](https://github.com/google-deepmind/open_spiel)
+[^2]: [open_spiel/python/algorithms/mcts.py](https://github.com/google-deepmind/open_spiel/blob/master/open_spiel/python/algorithms/mcts.py)
+[^3]: [Winands et al., Monte-Carlo Tree Search Solver, 2008](https://dke.maastrichtuniversity.nl/m.winands/documents/uctloa.pdf)
+[^4]: [化学の新しいカタチ](https://future-chem.com/)
+
