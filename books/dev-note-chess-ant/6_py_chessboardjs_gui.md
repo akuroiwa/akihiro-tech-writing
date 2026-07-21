@@ -12,7 +12,7 @@ title: "第6章：py-chessboardjs誕生：PythonとJavaScriptの架け橋（2023
 
 2023年11月28日、私は `py-chessboardjs` のリポジトリに最初のコミットを行いました。
 
-デスクトップアプリケーションのGUIを一から構築するのは非常に労力がかかります。Python には Tkinter や PyQt などのGUIツールキットがありますが、チェス盤の描画やアニメーションを美しく、かつ簡単に実装するのは困難です。
+デスクトップアプリケーションのGUIを一から構築するのは非常に労力がかかります。Python には Tkinter や PyQt などがありますが、私が求めるチェス盤の描画やアニメーションを短期間で実装するには負担が大きいと感じました。
 
 そこで私が採用したのが、以下の組み合わせでした。
 
@@ -37,7 +37,7 @@ class Api:
 
     def make_move(self, fen):
         # JS側から現在のFENを受け取り、探索を実行して指し手を返す
-        best_move = self.engine.search(fen)
+        best_move = self.engine.search(fen)  # イメージ（実際のAPIとは異なります）
         return best_move
 ```
 

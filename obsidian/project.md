@@ -70,6 +70,13 @@ AIエージェント（Antigravity/agy）の使用制限を考慮し、以下の
 * **開発ログ (`dev-log/`)**:
   * 過去のAI（ChatGPTやGemini等）とのやり取りが記録されている。
   * `chatgpt-20260621.txt`, `chatgpt-20260623.txt`, `chatgpt-20260629.txt`（特に20260629.txtにはZenn Booksのテンプレートや今後の進め方が記載されているため重要）。
+  * **ツールインストール日とログの時系列（事実確認用の仕様）**:
+    * `gemini-cli` インストール: **2025年6月29日**
+    * `antigravity-cli` インストール: **2026年5月22日**
+    * `spec-kit` 導入: **2025年9月7日** (最初の導入対象は `mcts-gen`、最初のログは `spec-kit-20250907.txt`)
+  * **ログファイルの分類ルール**:
+    * **`gemini-*.txt` (2025-07-01 〜 2025-09-07 直前)**: `spec-kit` 導入以前の `gemini-cli` による作業記録。メッセージの末尾付近に `Agent powering down. Goodbye!` があり、プロンプトが `akihiro@akihiro-Lenovo-ideapad-330-15IKB:~/文書/develop/git/akuroiwa/...$` で終わるものが該当。
+    * **`spec-kit-*.txt` (2025-09-07 〜 )**: `spec-kit` 導入以降の `gemini-cli` および `antigravity-cli` (agy) での作業記録。
   * ※ `dev-log/` は `.gitignore` に指定されており、コミット対象外。
 * **ソースコード (`dev-source/`)**:
   * 開発してきたソフトウェアのソースコード一式。
