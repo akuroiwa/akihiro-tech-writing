@@ -17,9 +17,11 @@
 | **2022年8月10日** | **探索エンジンの共通化と独立 (`mcts-solver`)** | `chess-ant` と `chem-ant` に共通していた MCTS アルゴリズム部分を `mcts-solver` という別パッケージとして独立させ、Git管理を開始。<br>Winandsらの論文「Monte-Carlo Tree Search Solver」(2008) のミニマックス木探索風の枝切りアルゴリズムを導入し、チェスの問題等の解の収束と精度が大幅に向上。 |
 | **2023年4月19日** | **AI（ChatGPT）との協業開始** | ChatGPTのアドバイスを得て、`mcts-solver` の並列処理化を達成。<br>コミットメッセージ: `Parallel processing is possible thanks to OpenAI's ChatGPT advice.`<br>これを契機にAIを本格的な開発パートナーとして迎える。 |
 | **2023年11月28日** | **専用GUIの開発 (`py-chessboardjs`)** | `pywebview` と `chessboard.js` を利用してJavaScriptとPythonを連携させ、`chess-ant` 用の独自GUIを構築。<br>AIとの本格的な共同デバッグにより、`chess-ant` 連携のエラーや並行処理問題（GUIとエンジンのスレッド管理）を乗り越える。 |
-| **2025年9月7日** | **エージェント指向の再設計 (`mcts-gen`)** | コマンドラインのAIエージェント (`gemini-cli`) を本格導入して開発。<br>`chess-ant` のGP（遺伝的プログラミング）エンジン部分をモダンなAIエージェント（LLM）に置き換えた汎用的なMCTSフレームワーク `mcts-gen` を開発。AIが「Policy Pruning（方策枝切り）」を行う仕組みを構築。 |
+| **2025年6月29日** | **`gemini-cli` インストール** | 初のコマンドラインAIエージェントの導入。エラーコピペ壁打ちからローカル連携への移行準備。作業ログは `dev-log/2025/gemini-*.txt` に保存開始。 |
+| **2025年9月7日** | **エージェント指向の再設計 (`mcts-gen`)** | コマンドラインのAIエージェント (`gemini-cli`) を本格導入して開発。<br>`chess-ant` のGP（遺伝的プログラミング）エンジン部分をモダンなAIエージェント（LLM）に置き換えた汎用的なMCTSフレームワーク `mcts-gen` を開発。AIが「Policy Pruning（方策枝切り）」を行う仕組みを構築。同時に `spec-kit` を初導入（ログは `spec-kit-20250907.txt`）。 |
 | **2025年11月1日** | **CI/CDとパッケージ化 (`fpocket-snap`)** | `fpocket`（分子の結合部位予測ツール）をSnapcraftを用いてパッケージングし、GitHub Actionsを用いた自動テスト・リリースのCI/CD自動化環境を構築。 |
-| **2026年4月24日** | **仕様駆動開発の自動化 (`spec-craft`)** | 本エージェント（`antigravity-cli`）との本格的な協業。<br>Obsidianに置かれた戦略（仕様）と `spec-kit` を連携させ、仕様駆動開発（SDD）を自動化する `spec-craft` を開発。 |
+| **2026年4月24日** | **仕様駆動開発の自動化 (`spec-craft`)** | 本エージェントとの本格的な協業。<br>Obsidianに置かれた戦略（仕様）と `spec-kit` を連携させ、仕様駆動開発（SDD）を自動化する `spec-craft` を開発。 |
+| **2026年5月22日** | **`antigravity-cli` インストール** | `spec-craft` を通じた仕様駆動開発の本格稼働に伴い、自律性の高い新エージェント `antigravity-cli` (agy) を導入。 |
 
 ---
 

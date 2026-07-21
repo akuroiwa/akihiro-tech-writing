@@ -55,6 +55,9 @@
    * 原則として [Zenn Book 構成テンプレート](file:///home/akihiro/文書/develop/git/akuroiwa/akihiro-tech-writing/obsidian/zenn-books-template.md) の構成に沿って執筆する。
 3. **対話型執筆**:
    * 毎回、新しい章を書き始める前に、対象となるソフトウェアの `dev-log/` のやり取り（ChatGPTやGemini等との当時の記録）や `dev-source/` のソースコードをAIが読み込み、ユーザーと打ち合わせを行ってから下書きを作成する。
+4. **脚注でのリポジトリ参照（Gitコマンド・コミットハッシュの掲載）**:
+   * 読者が文章を読むだけでなく、実際のコードや履歴をリポジトリから特定できるよう、各章の文末や脚注にコミットハッシュやGitコマンド（例: `git show <commit_hash>`, `git log --follow <filepath>`）を記載する。この方針は全シリーズに適用する。
+
 
 ---
 
