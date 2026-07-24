@@ -4,7 +4,7 @@ title: "第3章：fpocket-snap における自動テスト・リリース (CI/CD
 
 `spec-craft` による仕様駆動開発のプロセスは、ソフトウェアのコード記述だけでなく、そのパッケージングや配布、すなわち CI/CD（継続的インテグレーション/継続的デリバリー）の自動化領域へも拡張されました。
 
-その最も過酷な実験場となったのが、タンパク質の結合部位予測ツール `fpocket` を Snap パッケージとして自動配布する **`fpocket-snap`** プロジェクトでした。
+その最も過酷な実験場となったのが、タンパク質の結合部位予測ツール [`fpocket`](https://github.com/Discngine/fpocket) を Snap パッケージとして自動配布する [**`fpocket-snap`**](https://github.com/akuroiwa/fpocket-snap) プロジェクトでした。
 
 ---
 

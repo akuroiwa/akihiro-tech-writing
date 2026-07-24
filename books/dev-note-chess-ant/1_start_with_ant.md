@@ -68,7 +68,7 @@ DeepMind が **モンテカルロ木探索 (Monte Carlo Tree Search: MCTS)** を
 
 MCTS を理解する上で大きな助けとなったのが、将棋AI開発者である山岡忠夫氏のブログ「TadaoYamaokaの開発日記」です。AlphaZero 関連の論文は難解で、そのまま読み解くのは困難でしたが、このブログを通じて MCTS の実装上の考え方や探索定数の調整を理解することができました。
 
-* [TadaoYamaokaの開発日記](https://tadaoyamaoka.hatenablog.com/entry/2018/12/08/191619)
+* [AlphaZeroの論文 - TadaoYamaokaの開発日記](https://tadaoyamaoka.hatenablog.com/entry/2018/12/08/191619)
 
 さらに、Google DeepMind のオープンソース強化学習フレームワーク **OpenSpiel**[^1] のソースコードを読んでいると、`mcts.py`[^2] の docstring に重要な論文がいくつか引用されていました。
 
@@ -109,8 +109,6 @@ a_t = arg_max(Q(s_t, a) + C_gp * math.sqrt(2 * math.log(N(s_t)) / N(s_t, a)))
 
 応用のために必要となった化学情報学 (Cheminformatics) ソフトウェアの使い方は、**「化学の新しいカタチ」**[^4]というサイトで学びました。有機合成化学者向けのケモインフォマティクス入門として、RDKit の実践的な使い方が丁寧に解説されており、大変助かりました。
 
-* [化学の新しいカタチ | 有機合成化学者のための計算化学・ケモインフォマティクス入門](https://future-chem.com/)
-
 この経験が、後の `chem-ant` や `chem-classification` 開発の直接的なきっかけとなりました。
 
 ---
@@ -126,5 +124,5 @@ a_t = arg_max(Q(s_t, a) + C_gp * math.sqrt(2 * math.log(N(s_t)) / N(s_t, a)))
 [^1]: [google-deepmind/open_spiel](https://github.com/google-deepmind/open_spiel)
 [^2]: [open_spiel/python/algorithms/mcts.py](https://github.com/google-deepmind/open_spiel/blob/master/open_spiel/python/algorithms/mcts.py)
 [^3]: [Winands et al., Monte-Carlo Tree Search Solver, 2008](https://dke.maastrichtuniversity.nl/m.winands/documents/uctloa.pdf)
-[^4]: [化学の新しいカタチ](https://future-chem.com/)
+[^4]: [化学の新しいカタチ | 有機合成化学者のための計算化学・ケモインフォマティクス入門](https://future-chem.com/)
 

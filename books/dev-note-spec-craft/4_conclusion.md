@@ -28,7 +28,7 @@ title: "第4章：おわりに：仕様駆動がもたらす人間とAIの協調
 `mcts-gen` に実装された各種探索アルゴリズムやポリシー枝切り機構について、Google Colab 上で動作確認と再現実験を行えるノートブック環境を整備する予定です。これにより、ハードウェアに依存せず、誰でも手軽に検証可能なプレイグラウンドを提供することを目指しています。
 
 ### 3. AI 協業年表の継続的なアップデート
-Perplexity や ChatGPT、その他各種エージェントとの相談・デバッグ履歴を `development_timeline.md` などのインデックスファイルに集約し、人間とAIの設計意思決定の軌跡を継続的にアーカイブしていきます。
+Perplexity や ChatGPT、その他各種エージェントとの相談・デバッグ履歴を `development_timeline.md` などのインデックスファイルに集約し、人間とAIの設計意思決定の軌跡を継続的にアーカイブしていきます。[^1]
 
 ---
 
@@ -51,3 +51,4 @@ Perplexity や ChatGPT、その他各種エージェントとの相談・デバ�
 * **ChatGPT (OpenAI)**：仕様の段階的詳細化プロセス（Specify → Plan → Implement）に関する意見交換と推敲支援。
 * **Perplexity**：SnapcraftやGitHub ActionsでのCI/CD環境構築時のトラブルシューティングに関する情報提供。
 
+[^1]: [`akuroiwa/akihiro-tech-writing`](https://github.com/akuroiwa/akihiro-tech-writing) の `obsidian/` に記述。

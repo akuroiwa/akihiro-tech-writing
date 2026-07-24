@@ -2,13 +2,13 @@
 title: "第1章：チェスから汎用フレームワークへの進化（背景と目的）"
 ---
 
-前作『chess-ant 開発ノート』でまとめた通り、`chess-ant` は遺伝的プログラミング (Genetic Programming: GP) とモンテカルロ木探索 (Monte Carlo Tree Search: MCTS) を融合させたチェス特化型の問題解決エンジンでした。
+前作『chess-ant 開発ノート』でまとめた通り、[`chess-ant`](https://github.com/akuroiwa/chess-ant) は遺伝的プログラミング (Genetic Programming: GP) とモンテカルロ木探索 (Monte Carlo Tree Search: MCTS) を融合させたチェス特化型の問題解決エンジンでした。
 
 しかし、2025年に入り、LLM（大規模言語モデル）をはじめとするAI技術が急速な発展を遂げる中で、私はある一つの根本的な問いに突き当たりました。
 
 > **「MCP（Model Context Protocol）が利用できるようになったのだから、探索木の制御ロジックをAIエージェント（LLM）に担当させた方が合理的ではないか。従来の遺伝的プログラミング（GP）が担っていた役割を、最新のLLMやAIエージェントの推論力で置き換えられないだろうか」**
 
-これが、新たなプロジェクト **`mcts-gen`** の開発背景です。
+これが、新たなプロジェクト [**`mcts-gen`**](https://github.com/akuroiwa/mcts-gen) の開発背景です。
 
 ---
 
@@ -26,9 +26,9 @@ title: "第1章：チェスから汎用フレームワークへの進化（背�
 
 ## 構想段階での技術選定：LangGraph と LATS
 
-このプロジェクトの構想初期には、LangGraph や LATS (Language Agent Tree Search) の使用も検討していました。2025年3月2日に Perplexity との対話でこのアイデアを整理しており、MCTS の探索方針の高レベル制御として LATS を組み込む可能性を議論しました。
+このプロジェクトの構想初期には、LangGraph や LATS (Language Agent Tree Search) の使用も検討していました。2025年3月2日に Perplexity との対話でこのアイデアを整理しており、MCTS の探索方針の高レベル制御として LATS を組み込む可能性を議論しました。[^1]
 
-しかし最終的には採用しませんでした。当時のPC環境では LLM のローカル実行が重く Google Colab を利用していましたが、やがて `gemini-cli` や `antigravity-cli` のような MCP 対応のターミナル AI 環境が普及したことで、「LangGraph で自前のエージェント基盤を維持する意義が薄れた」と判断したのです。代わりに、どのエージェントからも呼び出せる MCP として実装する方向へと軸足を移しました。
+しかし最終的には採用しませんでした。当時のPC環境では LLM のローカル実行が重く Google Colab を利用していましたが、やがて `gemini-cli` や `antigravity-cli` のような MCP 対応のターミナル AI 環境が普及したことで、「LangGraph で自前のエージェント基盤を維持する意義が薄れた」と判断したのです。代わりに、どのエージェントからも呼び出せる MCP として実装する方向へと軸足を移しました。[^2]
 
 ---
 
@@ -37,3 +37,6 @@ title: "第1章：チェスから汎用フレームワークへの進化（背�
 チェスの駒の動きを読み切る木探索と、化学において目的の物性を持つリガンド分子（SMILES文字列）を生成するプロセスは、本質的に同一の「巨大な状態空間の探索問題」です。
 
 `mcts-gen` は、この二つの全く異なるドメインを同一の抽象クラスの傘下に収めることで、1つの探索エンジンでチェス問題の解決から創薬における分子類似度探索までをシームレスに実行可能にするフレームワークとして構想されました。そして、その探索効率を支えるコア技術こそが、次章で解説する「AIによる方策枝切り（Policy Pruning）」です。
+
+[^1]: [Language Agent Tree Search](https://github.com/langchain-ai/langgraph/blob/23961cff61a42b52525f3b20b4094d8d2fba1744/docs/docs/tutorials/lats/lats.ipynb)
+[^2]: `gemini-cli` をインストールしたのは日記の記録によると2025年6月29日で、`antigravity-cli` をインストールしたのは2026年5月22日です。

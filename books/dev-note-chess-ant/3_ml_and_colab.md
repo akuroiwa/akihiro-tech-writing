@@ -2,7 +2,7 @@
 title: "第3章：機械学習の導入と探索の深化（2022年）"
 ---
 
-2022年に入り、`chess-ant` はさらなる進化を遂げるべく、当時急速に発展していたディープラーニング（深層学習）の手法を取り入れる挑戦を開始しました。これが **`chess-classification`** プロジェクトの誕生です。
+2022年に入り、`chess-ant` はさらなる進化を遂げるべく、当時急速に発展していたディープラーニング（深層学習）の手法を取り入れる挑戦を開始しました。これが **`chess-classification`** プロジェクトの誕生です。[^1]
 
 ---
 
@@ -14,7 +14,7 @@ title: "第3章：機械学習の導入と探索の深化（2022年）"
 
 具体的には、チェスの盤面状態を表現する FEN (Forsyth-Edwards Notation) 文字列をトークンに分割し、テキスト分類モデルに流し込んで予測を行う仕組みです。
 
-手元の非力なPC環境ではディープラーニングモデルの学習に限界があったため、無料のGPU環境が使える **Google Colab** をフル活用しました。ライブラリには、PyTorchベースで簡単に各種トランスフォーマーモデルを扱える `Simple Transformers` を採用しました。
+手元の非力なPC環境ではディープラーニングモデルの学習に限界があったため、無料のGPU環境が使える **Google Colab** をフル活用しました。ライブラリには、PyTorchベースで簡単に各種トランスフォーマーモデルを扱える `Simple Transformers` を採用しました。[^2]
 
 ---
 
@@ -41,7 +41,7 @@ MCTS は1秒間に数千から数万回ものノード評価を繰り返す必�
 
 「チェスの最善手を探索するアルゴリズムは、ゲーム以外の状態空間探索、たとえば創薬や新しい分子の設計にも応用できるのではないか」
 
-この発想から、2022年6月25日、**`chem-ant`** および **`chem-classification`** の初期コミットを行いました。
+この発想から、2022年6月25日、**`chem-ant`** [^3]および **`chem-classification`** [^4]の初期コミットを行いました。
 
 チェスで培った「状態空間の探索ロジック（MCTS）」を、RDKit 等のケモインフォマティクス・ライブラリと結合し、「ターゲットとする物性や分子類似度を最大化するような分子（SMILES文字列）の生成木探索」を行うシステムへと応用したのです。
 
@@ -49,3 +49,7 @@ MCTS は1秒間に数千から数万回ものノード評価を繰り返す必�
 
 それが、次章で述べる「コア探索エンジンの独立と MCTS Solver の導入」へと繋がっていきます。
 
+[^1]: [akuroiwa/chess-classification](https://github.com/akuroiwa/chess-classification)
+[^2]: [Simple Transformers](https://github.com/thilinarajapakse/simpletransformers)
+[^3]: [akuroiwa/chem-ant](https://github.com/akuroiwa/chem-ant)
+[^4]: [akuroiwa/chem-classification](https://github.com/akuroiwa/chem-classification)
