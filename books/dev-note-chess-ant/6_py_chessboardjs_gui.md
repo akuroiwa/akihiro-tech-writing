@@ -8,11 +8,24 @@ title: "第6章：py-chessboardjs誕生：PythonとJavaScriptの架け橋（2023
 
 ---
 
+## GUI開発の前奏曲：JavaScript の Promise との遭遇
+
+本格的なGUI開発に着手する前、私は大きな技術的課題に直面していました。Python中心の開発者であった私は、JavaScriptの非同期処理（Asynchronous processing）に不慣れだったのです。
+
+2023年4月28日、私はすでに ChatGPT に対して JavaScript の `Promise` の仕組みそのものを質問していました。なぜなら、後に採用する `pywebview` が、Python 側の処理結果を JavaScript へと渡す際に `Promise` を返すという仕様だったからです。「Python 側の探索エンジンの思考が終わるのを待ってから、安全に JavaScript 側のチェス盤の描画を更新する」という連携の設計思想を理解する上で、この非同期 Promise の理解は不可欠な前哨戦（前段）でした。
+
+この理解を経て、2023年後半に実際のデスクトップGUIプロジェクトが本格的に始動することになります。
+
+---
+
 ## `pywebview` と `chessboard.js` という選択
 
-2023年11月28日、私は `py-chessboardjs` のリポジトリに最初のコミットを行いました。
+2023年11月28日、私は `py-chessboardjs` のリポジトリに最初のコミットを行いました。[^1]
 
 デスクトップアプリケーションのGUIを一から構築するのは非常に労力がかかります。Python には Tkinter や PyQt などがありますが、私が求めるチェス盤の描画やアニメーションを短期間で実装するには負担が大きいと感じました。
+
+[^1]: `py-chessboardjs` のリポジトリは [akuroiwa/py-chessboardjs](https://github.com/akuroiwa/py-chessboardjs) です。`git log --reverse` コマンドを実行することで、最初期からのコミット履歴を確認できます。
+
 
 そこで私が採用したのが、以下の組み合わせでした。
 

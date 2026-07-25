@@ -22,13 +22,20 @@ title: "第2章：AIによる方策枝切り (Policy Pruning) と価値予測"
 
 すべてのノード展開において AI を呼び出すのではなく、探索の初期段階、あるいは特定の「評価が不確実な重要ノード」でのみ LLM に問い合わせを行い、有望と思われる指し手や原子の候補を上位数件に「絞り込む（Pruning）」アプローチを採用しました。
 
-```
-[現在の状態]
-      │
-      ├─► [候補A] (LLMが有望と判断) ──► 探索を実行
-      ├─► [候補B] (LLMが有望と判断) ──► 探索を実行
-      ├─► [候補C] (LLMが低評価と判断) ──► 探索から即座に除外 (Pruning)
-      └─► [候補D] (LLMが低評価と判断) ──► 探索から即座に除外 (Pruning)
+```mermaid
+graph TD
+    Current["現在の状態"] --> A["候補A (有望)"]
+    Current --> B["候補B (有望)"]
+    Current --> C["候補C (低評価)"]
+    Current --> D["候補D (低評価)"]
+
+    A --> ExploreA["探索を実行"]
+    B --> ExploreB["探索を実行"]
+    C --> PruningC["除外 (Pruned)"]
+    D --> PruningD["除外 (Pruned)"]
+
+    classDef pruned fill:#ffe6e6,stroke:#ff8080,stroke-width:1px,stroke-dasharray: 5 5;
+    class C,D,PruningC,PruningD pruned;
 ```
 
 この「方策枝切り (Policy Pruning)」の導入により、探索木全体の幅（分岐数）を狭め、探索全体の深さをより深く掘り下げることを狙いました。

@@ -16,17 +16,13 @@ AIエージェントが長期の開発プロセスにおいて迷走する最大
 
 AIエージェントは、コードを書き換える前に必ずこの Obsidian の戦略ファイルを読み込み、プロジェクトの方針から逸脱していないかを確認する「Rule of Double Check」のプロセスを強制されます。
 
-```
-[ 人間 (設計・戦略) ]
-       │
-       ▼ (編集・一元管理)
-[ Obsidian (obsidian/) ] ◄───┐ (Double Check)
-       │                    │
-       ▼ (コンテキスト連携)  │
-[ spec-craft ] ─────────────┼─► [ AIエージェント (agy) ]
-       │                    │
-       ▼ (実装・実行)        │
-[ spec-kit (specs/) ] ──────┘ (実装タスク定義)
+```mermaid
+graph TD
+    Human["人間 (設計・戦略)"] -->|編集・一元管理| Obsidian["Obsidian (obsidian/)"]
+    Obsidian -->|コンテキスト連携| SpecCraft["spec-craft"]
+    SpecCraft -->|実装・実行| SpecKit["spec-kit (specs/)"]
+    SpecKit -->|実装タスク定義| Agent["AIエージェント (agy)"]
+    Agent -->|Double Check| Obsidian
 ```
 
 ---

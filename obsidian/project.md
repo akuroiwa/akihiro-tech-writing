@@ -125,8 +125,8 @@ AIエージェント（Antigravity/agy）の使用制限を考慮し、以下の
 ### ④ Zenn Markdown 仕様の最適化
 * **リンクと脚注の併記**: 本文の流れを妨げないため、長いURLリンクはアンカーテキストとして貼るか、Zennの脚注記法を利用して文末にまとめる。
   * *脚注記法例*: `本文中に記述する[^1]` と `[^1]: リンク先URLや注記`
+* **非公開ログファイルの非掲載**: `dev-log/` などのGit追跡対象外の非公開ディレクトリ内にあるログファイル（例: `spec-kit-*.txt`, `gemini-*.txt` 等）は読者が参照できません。そのため、脚注にはこれらの具体的なファイルパスを記載せず、日付とコミット履歴の確認方法（Gitコマンドなど）のみを記載する方針とします。
 * 詳細な記法や仕様については、Zenn公式ガイドを参照する。
   * [ZennのMarkdown記法一覧](https://zenn.dev/zenn/articles/markdown-guide)
   * [Zennのスラッグ(slug)とは](https://zenn.dev/zenn/articles/what-is-slug)
   * [Zenn CLIで記事・本を管理する方法](https://zenn.dev/zenn/articles/zenn-cli-guide)
-

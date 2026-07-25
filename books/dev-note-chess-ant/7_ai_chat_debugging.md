@@ -10,7 +10,7 @@ title: "第7章：ChatGPT / Bard と格闘したJSデバッグ（2023年末）"
 
 ## `chess_ant.main()` 呼び出しエラーとの遭遇
 
-2023年11月29日、`py-chessboardjs` のコミットログに以下のようなメッセージが記録されています。
+2023年11月29日、`py-chessboardjs` のコミットログに以下のようなメッセージが記録されています。[^1]
 
 * **Commit Message**: `What should I do about the error in chess_ant.main()?`
 
@@ -45,3 +45,6 @@ if (lastMove === 'O-O' || lastMove === 'O-O-O') {
 ChatGPT や Bard が提示した `setTimeout` による処理の遅延や、イベントロックフラグ（`isCastlingInProgress`）の導入といったアドバイスを得て、JSとPythonという異なる言語間の連携バグを一つ一つクリアしていきました。
 
 しかし、これらの「指し手の遅延調整」は、一時的な応急処置に過ぎませんでした。2年後、アプリケーションがより重い探索エンジンと本格的に並行稼働し始めたとき、この非同期設計は致命的なフリーズ問題として再び牙をむくことになります。
+
+[^1]: このコミットは `py-chessboardjs` リポジトリの履歴に記録されています。該当リポジトリ（[akuroiwa/py-chessboardjs](https://github.com/akuroiwa/py-chessboardjs)）にて `git log --oneline --grep="chess_ant.main"` で確認できます。
+

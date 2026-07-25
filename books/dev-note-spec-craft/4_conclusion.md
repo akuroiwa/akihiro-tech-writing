@@ -22,7 +22,8 @@ title: "第4章：おわりに：仕様駆動がもたらす人間とAIの協調
 本書の執筆時点において、`spec-craft` および関連エコシステムでは、以下の開発・検証計画が進行しています。
 
 ### 1. `spec-craft` の Obsidian CLI 対応
-現在、Obsidian 側のドキュメント（`obsidian/` ディレクトリ）と `spec-kit` のバインディングは、ローカルファイルパスを介して行われています。これをさらに発展させ、Obsidian コマンドラインツール（CLI）を介して、戦略ファイルやタスク一覧の同期、進捗の更新などを完全に自動化する仕組みの構築を目指しています。
+現在、`spec-craft` が `obsidian/` ディレクトリ配下に Markdown ファイルを新規作成する際、Obsidian CLI などの専用インターフェースを介さず、AIエージェントがファイルシステムにファイルを直接出力しています。このため、Obsidian 側で認識されるべきフロントマター（メタデータ）が自動で記述されず、単なる通常の Markdown ファイルとして生成されてしまうという課題（メタデータの欠落）が存在します。この問題を根本解決するため、Obsidian CLI と統合し、ファイルの生成・同期時に適切なフロントマターを自動付与する仕組みの構築を目指しています。
+
 
 ### 2. `mcts-gen` の Google Colab 上での動作検証
 `mcts-gen` に実装された各種探索アルゴリズムやポリシー枝切り機構について、Google Colab 上で動作確認と再現実験を行えるノートブック環境を整備する予定です。これにより、ハードウェアに依存せず、誰でも手軽に検証可能なプレイグラウンドを提供することを目指しています。
@@ -50,5 +51,99 @@ Perplexity や ChatGPT、その他各種エージェントとの相談・デバ�
 * **Claude (Anthropic)**：`antigravity-cli` (agy) に搭載されたエージェントによる、仕様駆動開発（SDD）の自動適用とタスク実行、および本稿の編集レビュー。
 * **ChatGPT (OpenAI)**：仕様の段階的詳細化プロセス（Specify → Plan → Implement）に関する意見交換と推敲支援。
 * **Perplexity**：SnapcraftやGitHub ActionsでのCI/CD環境構築時のトラブルシューティングに関する情報提供。
+
+以下はGeminiの生成したカバー画像出力コードです：
+
+```python
+import os
+from PIL import Image, ImageDraw
+
+# Zenn recommended ratio for Book cover: 1 : 1.4 (1000x1400 px)
+width = 1000
+height = 1400
+image = Image.new("RGBA", (width, height), "#0F172A")
+draw = ImageDraw.Draw(image)
+
+# 1. Background Gradient (Dark Blue-Slate to Indigo/Violet gradient)
+for y in range(height):
+    # Transition from #0F172A to #1E1B4B / #312E81
+    r = int(15 + (49 - 15) * (y / height))
+    g = int(23 + (46 - 23) * (y / height))
+    b = int(42 + (129 - 42) * (y / height))
+    for x in range(width):
+        draw.point((x, y), fill=(r, g, b, 255))
+
+# 2. Draw Blueprint Grid / Technical Spec Architectural Lines
+grid_color = (99, 102, 241, 30) # Indigo tint blueprint grid
+horizon_y = 520
+vp_x = width // 2
+vp_y = 70
+
+for i in range(-15, 16):
+    start_x = vp_x + i * 90
+    draw.line([(vp_x, vp_y), (start_x, height)], fill=grid_color, width=1)
+
+for i in range(15):
+    y = horizon_y + int((height - horizon_y) * (i / 14) ** 1.8)
+    draw.line([(0, y), (width, y)], fill=grid_color, width=1)
+
+# 3. Draw Blueprint / Architectural Craft Elements (Layered Spec Blocks & Connections)
+# Central Blueprint Blueprint Box (Specification Document / Design Crafting)
+center_x, center_y = 500, 920
+
+# Structured Layers (Specification Blocks)
+layers = [
+    # (x, y, w, h, color, label_type)
+    (center_x - 180, center_y - 220, 360, 80, "#6366F1", "Requirement / Spec Root"),
+    (center_x - 260, center_y - 110, 230, 75, "#8B5CF6", "Module Craft A"),
+    (center_x + 30, center_y - 110, 230, 75, "#8B5CF6", "Module Craft B"),
+    (center_x - 300, center_y + 10, 170, 70, "#A855F7", "Subsystem 1"),
+    (center_x - 100, center_y + 10, 170, 70, "#EC4899", "Subsystem 2 (Core)"),
+    (center_x + 100, center_y + 10, 200, 70, "#A855F7", "Subsystem 3"),
+    (center_x - 220, center_y + 120, 440, 80, "#3B82F6", "Implementation & Test Craft"),
+]
+
+# Connecting Lines (Spec Architecture Blueprint Flow)
+connections = [
+    ((center_x, center_y - 140), (center_x - 145, center_y - 110)),
+    ((center_x, center_y - 140), (center_x + 145, center_y - 110)),
+    ((center_x - 145, center_y - 35), (center_x - 215, center_y + 10)),
+    ((center_x - 145, center_y - 35), (center_x - 15, center_y + 10)),
+    ((center_x + 145, center_y - 35), (center_x + 200, center_y + 10)),
+    ((center_x - 15, center_y + 80), (center_x, center_y + 120)),
+    ((center_x - 215, center_y + 80), (center_x - 100, center_y + 120)),
+    ((center_x + 200, center_y + 80), (center_x + 100, center_y + 120)),
+]
+
+for p1, p2 in connections:
+    draw.line([p1, p2], fill=(168, 85, 247, 180), width=2)
+
+# Draw Layer Blocks (Blueprint Style with Outline & Accent Corners)
+for lx, ly, lw, lh, color, _ in layers:
+    # Semi-transparent fill block
+    draw.rectangle([lx, ly, lx + lw, ly + lh], fill=(15, 23, 42, 210), outline=color, width=2)
+    # Inner subtle glow outline
+    draw.rectangle([lx + 4, ly + 4, lx + lw - 4, ly + lh - 4], outline=(255, 255, 255, 30), width=1)
+
+    # Technical Corner Accents
+    accent_len = 10
+    draw.line([(lx, ly), (lx + accent_len, ly)], fill=color, width=3)
+    draw.line([(lx, ly), (lx, ly + accent_len)], fill=color, width=3)
+    draw.line([(lx + lw, ly + lh), (lx + lw - accent_len, ly + lh)], fill=color, width=3)
+    draw.line([(lx + lw, ly + lh), (lx + lw, ly + lh - accent_len)], fill=color, width=3)
+
+# Blueprint Drafting Measurement / Spec Marker lines
+draw.line([(center_x - 330, center_y - 240), (center_x - 330, center_y + 220)], fill=(99, 102, 241, 100), width=1)
+draw.line([(center_x - 340, center_y - 240), (center_x - 320, center_y - 240)], fill=(99, 102, 241, 150), width=2)
+draw.line([(center_x - 340, center_y + 220), (center_x - 320, center_y + 220)], fill=(99, 102, 241, 150), width=2)
+
+# 4. Accent Overlay / Frame Lines (Book Cover Look)
+draw.rectangle([60, 60, 940, 1340], outline=(255, 255, 255, 15), width=2)
+
+# Save output
+output_path = "cover_spec_craft.png"
+image.convert("RGB").save(output_path, "PNG")
+print(f"Success: Saved to {output_path}")
+```
 
 [^1]: [`akuroiwa/akihiro-tech-writing`](https://github.com/akuroiwa/akihiro-tech-writing) の `obsidian/` に記述。

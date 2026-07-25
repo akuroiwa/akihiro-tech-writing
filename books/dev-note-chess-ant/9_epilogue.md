@@ -47,3 +47,100 @@ title: "おわりに：そして「汎用化（mcts-gen）」と「自動化（s
 * **Claude (Anthropic)**：本技術ノートの推敲、事実関係の確認、表現のブラッシュアップ。
 * **Perplexity**：過去の対話履歴のインデックス化と、技術要素の関連文献・時系列整理。
 
+以下は**Gemini**の生成したカバー画像出力コードです：
+
+```python
+import os
+from PIL import Image, ImageDraw, ImageFont
+import math
+
+# Zenn recommended ratio for Book cover: 1 : 1.4 (1000x1400 px)
+width = 1000
+height = 1400
+image = Image.new("RGBA", (width, height), "#0B0F19")
+draw = ImageDraw.Draw(image)
+
+# 1. Background Gradient (Deep Navy to Dark Indigo, vertical flow)
+for y in range(height):
+    # Smooth transition from #0B0F19 to #1E1B4B
+    r = int(11 + (30 - 11) * (y / height))
+    g = int(15 + (27 - 15) * (y / height))
+    b = int(25 + (75 - 25) * (y / height))
+    for x in range(width):
+        draw.point((x, y), fill=(r, g, b, 255))
+
+# 2. Draw Abstract Chess Grid Perspective (Cyber Style - Adjusted for tall canvas)
+grid_color = (14, 165, 233, 45) # Light cyber blue with alpha
+horizon_y = 600
+vp_x = width // 2
+vp_y = 100
+
+for i in range(-15, 16):
+    start_x = vp_x + i * 90
+    draw.line([(vp_x, vp_y), (start_x, height)], fill=grid_color, width=1)
+
+# Horizontal lines of perspective grid
+for i in range(15):
+    y = horizon_y + int((height - horizon_y) * (i / 14) ** 1.8)
+    draw.line([(0, y), (width, y)], fill=grid_color, width=1)
+
+# 3. Draw MCTS / AI Network (Nodes and connections centered dynamically)
+nodes = [
+    (500, 750), (350, 900), (650, 850), (250, 1100),
+    (450, 1050), (600, 1120), (750, 1000), (850, 1200)
+]
+# Draw connections (Circuit/Network style)
+conn_color = (245, 158, 11, 80) # Gold with alpha
+for i, n1 in enumerate(nodes):
+    for j, n2 in enumerate(nodes):
+        if 0 < abs(i - j) <= 2:
+            draw.line([n1, n2], fill=conn_color, width=2)
+
+# Draw Node circles
+for x, y in nodes:
+    draw.ellipse([x-10, y-10, x+10, y+10], fill="#F59E0B", outline="#0B0F19", width=3)
+    # Outer glow
+    draw.ellipse([x-20, y-20, x+20, y+20], outline=(245, 158, 11, 50), width=1)
+
+# 4. Stylized "Ant" (Improved: Head + Thorax + Abdomen, 6 Legs + Antennae)
+ant_x, ant_y = 450, 1050  # 中心座標（胸の位置）
+
+# (1) 体節の描画（腹 -> 胸 -> 頭 の順で重ねて描画）
+# 腹部 (Abdomen/Gaster): 下側に大きめの楕円
+draw.ellipse([ant_x - 18, ant_y + 8, ant_x + 18, ant_y + 38], fill="#0284C7")
+
+# 胸部 (Thorax): 中央の体節
+draw.ellipse([ant_x - 12, ant_y - 12, ant_x + 12, ant_y + 12], fill="#0EA5E9")
+
+# 頭部 (Head): 上側に小〜中サイズの楕円
+draw.ellipse([ant_x - 10, ant_y - 32, ant_x + 10, ant_y - 16], fill="#38BDF8")
+
+# (2) 触角（Antennae）の描画
+draw.line([(ant_x - 4, ant_y - 28), (ant_x - 16, ant_y - 42), (ant_x - 22, ant_y - 40)], fill="#38BDF8", width=2)
+draw.line([(ant_x + 4, ant_y - 28), (ant_x + 16, ant_y - 42), (ant_x + 22, ant_y - 40)], fill="#38BDF8", width=2)
+
+# (3) 脚（Legs）の描画（胸部から左右3対＝計6本）
+leg_color = "#0EA5E9"
+leg_width = 3
+
+# 前脚 (Front legs - 上向きに伸びて曲がる)
+draw.line([(ant_x - 8, ant_y - 6), (ant_x - 28, ant_y - 18), (ant_x - 34, ant_y - 28)], fill=leg_color, width=leg_width)
+draw.line([(ant_x + 8, ant_y - 6), (ant_x + 28, ant_y - 18), (ant_x + 34, ant_y - 28)], fill=leg_color, width=leg_width)
+
+# 中脚 (Middle legs - 横方向に展開)
+draw.line([(ant_x - 10, ant_y), (ant_x - 32, ant_y - 2), (ant_x - 40, ant_y + 8)], fill=leg_color, width=leg_width)
+draw.line([(ant_x + 10, ant_y), (ant_x + 32, ant_y - 2), (ant_x + 40, ant_y + 8)], fill=leg_color, width=leg_width)
+
+# 後脚 (Hind legs - 下向きに長く伸ばす)
+draw.line([(ant_x - 8, ant_y + 6), (ant_x - 28, ant_y + 18), (ant_x - 36, ant_y + 34)], fill=leg_color, width=leg_width)
+draw.line([(ant_x + 8, ant_y + 6), (ant_x + 28, ant_y + 18), (ant_x + 36, ant_y + 34)], fill=leg_color, width=leg_width)
+
+
+# 5. Accent Overlay / Modern Frame Lines for book cover look
+draw.rectangle([60, 60, 940, 1340], outline=(255, 255, 255, 15), width=2)
+
+# Save the generated vertical cover image
+output_path = "cover_vertical.png"
+image.convert("RGB").save(output_path, "PNG")
+print(f"Success: Saved to {output_path}")
+```
