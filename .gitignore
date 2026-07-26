@@ -9,4 +9,4 @@ dev-source/
 # Temp and backup files
 *~
 \#*#
-.agents/AGENTS.md~
+.#*

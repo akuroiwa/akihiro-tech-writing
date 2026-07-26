@@ -1,7 +1,7 @@
 title: "mcts-gen 開発ノート：AIエージェントと構築する汎用モンテカルロ木探索フレームワーク"
 summary: "chess-antのGPエンジンをLLMによる評価に置き換え、チェス・将棋・分子探索へ応用した汎用MCTSフレームワークmcts-genの開発ノート。"
 topics: ["python", "mcts", "ai", "llm", "framework"]
-published: false
+published: true
 price: 0
 chapters:
   - 1_background_and_goal

@@ -37,7 +37,7 @@ AIエージェントとの協業により、以下のアーキテクチャへの
 
 これにより、ユーザーが思考中にどのような操作を行っても、`EngineWorker` がバックグラウンドで思考プロセスを安全にキャンセル（あるいは再起動）し、UIスレッドへの影響を大幅に低減した、堅牢な非同期協調動作が実現しました。
 
-2025年10月25日、この根本解決は以下のコミットとしてリポジトリにマージされました。[^5]
+2025年10月25日、この根本解決は以下のコミットとしてリポジトリにマージされました。[^1]
 
 * **Commit Message**: `feat: Implement robust engine concurrency and PyPI workflow` (Commit: `5df5df1`)
 
@@ -51,5 +51,5 @@ GitHub にタグをプッシュすると、GitHub Actions が自動的にトリ�
 
 手作業でのリリース作業や、セキュリティキーの漏洩リスクを排除する「Trusted Publishing（ID連携認証）」を導入し、個人開発でありながら、本格的な CI/CD 自動化体制を確立することができたのです。
 
-[^5]: `git show 5df5df1` または `git log --oneline --grep EngineWorker` で当該実装のコミット詳細を確認できます。
+[^1]: `git show 5df5df1` または `git log --oneline --grep EngineWorker` で当該実装のコミット詳細を確認できます。
 
