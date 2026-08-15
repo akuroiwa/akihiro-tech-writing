@@ -22,6 +22,8 @@
 | **2025年11月1日** | **CI/CDとパッケージ化 (`fpocket-snap`)** | `fpocket`（分子の結合部位予測ツール）をSnapcraftを用いてパッケージングし、GitHub Actionsを用いた自動テスト・リリースのCI/CD自動化環境を構築。 |
 | **2026年4月24日** | **仕様駆動開発の自動化 (`spec-craft`)** | 本エージェントとの本格的な協業。<br>Obsidianに置かれた戦略（仕様）と `spec-kit` を連携させ、仕様駆動開発（SDD）を自動化する `spec-craft` を開発。 |
 | **2026年5月22日** | **`antigravity-cli` インストール** | `spec-craft` を通じた仕様駆動開発の本格稼働に伴い、自律性の高い新エージェント `antigravity-cli` (agy) を導入。 |
+| **2026年8月3日〜15日** | **Prompt-MCTS への転換 (`mcts-gen`)** | GP由来の `if_then_else` 条件コード生成から、LLMの評価器としての強みを活かした自然言語プロンプト（ドメインヒューリスティクス）によるMCTS誘導手法「Prompt-MCTS」への転換。<br>Gymnasium環境との統合 (`specs/017-prompt-mcts-gymnasium`)、および `spec-craft` パッケージ群の最新化を達成。 |
+
 
 ---
 
