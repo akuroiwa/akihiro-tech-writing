@@ -24,12 +24,16 @@ title: "第4章：おわりに：仕様駆動がもたらす人間とAIの協調
 ### 1. `spec-craft` の Obsidian CLI 対応
 現在、`spec-craft` が `obsidian/` ディレクトリ配下に Markdown ファイルを新規作成する際、Obsidian CLI などの専用インターフェースを介さず、AIエージェントがファイルシステムにファイルを直接出力しています。このため、Obsidian 側で認識されるべきフロントマター（メタデータ）が自動で記述されず、単なる通常の Markdown ファイルとして生成されてしまうという課題（メタデータの欠落）が存在します。この問題を根本解決するため、Obsidian CLI と統合し、ファイルの生成・同期時に適切なフロントマターを自動付与する仕組みの構築を目指しています。
 
+### 2. Emacs 統合の実現（v0.1.5/v0.1.6、2026年8月）
 
-### 2. `mcts-gen` の Google Colab 上での動作検証
+ロードマップのひとつとして掲げていた Emacs との連携は、2026年8月に実際に達成されました（`specs/014-emacs-inspect-and`）。`spec-craft` の `core/emacs.py` に `eval_in_buffer` 関数を追加し、Emacs のバッファ内でコードブロックを直接評価する機能を実装しました。あわせて、エージェントが動作中かどうかをポーリングで確認するデーモン監視機構と、`init.el` による `auto-revert` の自動設定を実装し、Emacs を `spec-craft` の統合ターミナルとして活用できる環境が整いました。パーサー（`core/parser.py`）のコードフェンス解析の不具合修正も同時に行われています。[^emacs]
+
+### 3. `mcts-gen` の Google Colab 上での動作検証
 `mcts-gen` に実装された各種探索アルゴリズムやポリシー枝切り機構について、Google Colab 上で動作確認と再現実験を行えるノートブック環境を整備する予定です。これにより、ハードウェアに依存せず、誰でも手軽に検証可能なプレイグラウンドを提供することを目指しています。
 
-### 3. AI 協業年表の継続的なアップデート
+### 4. AI 協業年表の継続的なアップデート
 Perplexity や ChatGPT、その他各種エージェントとの相談・デバッグ履歴を `development_timeline.md` などのインデックスファイルに集約し、人間とAIの設計意思決定の軌跡を継続的にアーカイブしていきます。[^1]
+
 
 ---
 
@@ -147,3 +151,5 @@ print(f"Success: Saved to {output_path}")
 ```
 
 [^1]: [`akuroiwa/akihiro-tech-writing`](https://github.com/akuroiwa/akihiro-tech-writing) の `obsidian/` に記述。
+[^emacs]: Emacs 統合の実装コミット詳細は `spec-craft` リポジトリにて `git show 282465a` で確認できます（2026年8月3日、v0.1.5/v0.1.6）。
+
