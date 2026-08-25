@@ -1,7 +1,7 @@
 title: "spec-craft 開発ノート：AIエージェントと実践する仕様駆動開発"
 summary: "AIの迷走やトークン制限を防ぐため、Obsidianを用いた戦略記述とspec-kitを連携させ、仕様駆動開発（SDD）を構造化したツールの開発ノート。"
 topics: ["ai", "obsidian", "sdd", "framework", "cicd"]
-published: false
+published: true
 price: 0
 chapters:
   - 1_necessity_of_sdd
